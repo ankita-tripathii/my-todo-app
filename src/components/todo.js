@@ -6,9 +6,9 @@ import { PencilSquare, Trash, ThreeDotsVertical} from 'react-bootstrap-icons';
   const [tasks, setTasks] = useState([]);
   const [newtasks, setNewtasks] = useState('');
   const [filter, setFilter] = useState('pending');
-  const [showEditModal, setShowEditModal]=useState('false');
+  const [showEditModal, setShowEditModal]=useState(false);
   const [editTasks, setEditTasks] = useState('');
-  const [editTasksIndex, setEditTasksIndex] = useState('null');
+  const [editTasksIndex, setEditTasksIndex] = useState(null);
 
   const HandelInputChange = (event) => {
     setNewtasks(event.target.value);
@@ -92,7 +92,7 @@ import { PencilSquare, Trash, ThreeDotsVertical} from 'react-bootstrap-icons';
          <ul className="list-group">
            
            {tasks.map((task, index) => (
-           ((filter === 'pending' && !task.done) ||
+           ((filter === 'pending' && !task.done && !task.deleted) ||
            (filter === 'done' && task.done) ||
            (filter === 'deleted' && task.deleted)) ? (
 
@@ -118,8 +118,8 @@ import { PencilSquare, Trash, ThreeDotsVertical} from 'react-bootstrap-icons';
          </ul>
       </div>
         
-      <div className={`modal ${showEditModal ? 'show' : ''}`} id="editmodal" tabIndex='-1' aria-labelledby="examplemodalLabel"
-      aria-hidden={!showEditModal ? 'true' : 'false'}>
+      {showEditModal && ( 
+      <div className= "modal" id="editmodal" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
        <div className="modal-dialog">
          <div className="modal-content">
 
@@ -130,7 +130,10 @@ import { PencilSquare, Trash, ThreeDotsVertical} from 'react-bootstrap-icons';
            <div className="modal-body">
               <input 
               type="text"
-              classNam="form-control"/>
+              classNam="form-control"
+              value={editTasks} 
+              onChange={(e) => setEditTasks(e.target.value)}
+              />
            </div>
 
            <div className="modal-footer">
@@ -140,7 +143,8 @@ import { PencilSquare, Trash, ThreeDotsVertical} from 'react-bootstrap-icons';
 
          </div>
        </div>
-      </div>      
+      </div>  
+      )}    
     </div>
     );
 }
