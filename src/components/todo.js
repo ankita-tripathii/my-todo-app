@@ -5,8 +5,11 @@ import { PencilSquare, Trash, ThreeDotsVertical} from 'react-bootstrap-icons';
 
   const [tasks, setTasks] = useState([]);
   const [newtasks, setNewtasks] = useState('');
+
   const [filter, setFilter] = useState('pending');
+
   const [showEditModal, setShowEditModal]=useState(false);
+  
   const [editTasks, setEditTasks] = useState('');
   const [editTasksIndex, setEditTasksIndex] = useState(null);
 
@@ -77,8 +80,7 @@ import { PencilSquare, Trash, ThreeDotsVertical} from 'react-bootstrap-icons';
 
       <div className="row mt-2">
          <div className="input-group mb-2">
-         <input 
-            type="text"
+         <textarea
             className="form-control"
             placeholder="Add your task here"
             value={newtasks}
@@ -146,6 +148,6 @@ import { PencilSquare, Trash, ThreeDotsVertical} from 'react-bootstrap-icons';
       </div>  
       )}    
     </div>
-    );
+  );
 }
 
